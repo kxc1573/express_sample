@@ -9,6 +9,9 @@ var enroll = require('../mongodb').enroll;
 var sc = require('../status_code');
 var log = require('../utils/log');
 
+let genderList = [0, 1];
+let swordList = [1, 2, 3, 4, 5];
+
 router.post('/regist', function(req, res, next) {
 	let wxid = req.body.wxid;
 	let name = req.body.name;
@@ -23,8 +26,9 @@ router.post('/regist', function(req, res, next) {
 	let unit = req.body.unit;
 	let school = req.body.school;
 
-	if (!(wxid && name && birth && gender && swordClass && address && 
-		linkName && linkRelationship && linkMobile && linkEmail)) {
+	if (!(wxid && name && birth && genderList.indexOf(gender) != -1 && 
+		swordList.indexOf(swordClass) != -1 && address && linkName && 
+		linkRelationship && linkMobile && linkEmail)) {
 		res.send(sc.ERR_PARAM);
 		return;
 	}
